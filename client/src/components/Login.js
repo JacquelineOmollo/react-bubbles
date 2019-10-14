@@ -1,5 +1,6 @@
 import React from "react";
-import axiosWithAuth from "./utils/axiousWithAuth";
+import axiosWithAuth from "../components/utils/axiosWithAuth";
+
 class Login extends React.Component {
   state = {
     credentials: {
@@ -13,7 +14,7 @@ class Login extends React.Component {
   login = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post("http://localhost:5000/api/login", this.state.credentials)
+      .post("/login", this.state.credentials)
       .then(res => {
         console.log(this.props.history);
         localStorage.setItem("token", res.data.payload);
@@ -30,13 +31,14 @@ class Login extends React.Component {
       }
     });
   };
+
   render() {
     return (
       <>
         <h1>Welcome to the Bubble App!</h1>
         <p>Build a login page here</p>
 
-        <form onSubmit={this.login}>
+        <form layout="inline" onSubmit={this.login}>
           <input
             type="text"
             name="username"
@@ -50,10 +52,11 @@ class Login extends React.Component {
             onChange={this.handleChange}
           />
 
-          <button type="submit">Log In</button>
+          <button htmlType="submit"> Log in</button>
         </form>
       </>
     );
   }
 }
+
 export default Login;

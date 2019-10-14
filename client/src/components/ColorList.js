@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosWithAuth from "./utils/axiousWithAuth";
+import axiosWithAuth from "../components/utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -22,7 +22,7 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
     axiosWithAuth()
-      .put("http://localhost:5000/api/colors/${colorToEdit.id", colorToEdit)
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
         localStorage.setItem("token", res.data.token);
         this.props.history.push("/");
@@ -31,9 +31,13 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     // make a delete request to delete this color
+
     axiosWithAuth().delete(`http://localhost:5000/api/colors/${color.id}`);
   };
 
+  const addColor = color => {
+    axiosWithAuth().put(`http://localhost:5000/api/colors/${color.id}`);
+  };
   return (
     <div className="colors-wrap">
       <p>colors</p>
